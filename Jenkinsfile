@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                bat 'npm install json-server'
+                bat 'npm i'
+                bat 'npm i json-server'
             }
         }
         stage('deploy') {
