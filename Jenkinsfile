@@ -4,15 +4,13 @@ pipeline {
         stage('build') {
             steps {
                 bat 'npm i'
-                bat 'npm i json-server'
+                bat 'npm run build'
             }
         }
         stage('deploy') {
             steps {
                 parallel (
-                    a: {bat 'npx json-server groupproject/src/database/Properties.json --port 8000'},
-                    b: {bat 'npx json-server groupproject/src/database/Sellers.json --port 8001'},
-                    c: {bat 'cd groupproject'},
+                    a: {bat 'npx json-server src/database/Properties.json --port 8000'},
                     d: {bat 'npm start'}
                 )
             }
