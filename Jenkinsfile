@@ -7,18 +7,12 @@ pipeline {
             }
         }
         stage('deploy') {
-            parallel {
-                stage('Deploy json-server'){
-                    steps {
-                        bat 'npx json-server src/database/Properties.json --port 8000'
-                        bat 'npx json-server src/database/Sellers.json --port 8001'
-                    }
-                }
-                stage('Run app'){
-                    steps {
-                        bat 'npm start'
-                    }
-                }
+            steps {
+                parallel (
+                    a: {bat 'npx json-server src/database/Properties.json --port 8000'},
+                    b: {bat 'npx json-server src/database/Sellers.json --port 8001'},
+                    c: {bat 'npm start'}
+                )
             }
         }
     }
