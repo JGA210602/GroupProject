@@ -9,8 +9,8 @@ pipeline {
         stage('deploy') {
             steps {
                 parallel (
-                    a: {bat 'npx json-server src/database/Properties.json --port 8000'},
-                    b: {bat 'npx json-server src/database/Sellers.json --port 8001'},
+                    a: {bat 'npx json-server groupproject/src/database/Properties.json --port 8000'},
+                    b: {bat 'npx json-server groupproject/src/database/Sellers.json --port 8001'},
                     c: {bat 'npm start'}
                 )
             }
